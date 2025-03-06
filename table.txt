@@ -1,0 +1,54 @@
+//user_info table
+
+CREATE TABLE user_info (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    state VARCHAR(100) NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+//h_type table
+
+CREATE TABLE h_type (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    hair_texture VARCHAR(50),
+    hair_condition VARCHAR(50),
+    dandruff ENUM('Yes', 'No') NOT NULL,
+    hairfall ENUM('Yes', 'No') NOT NULL,
+    scalp VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user_info(id) ON DELETE CASCADE
+);
+
+//product table
+
+CREATE TABLE product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    image VARCHAR(255) NOT NULL
+);
+
+
+//inserting images into product table
+
+
+INSERT INTO product (name, price, image) VALUES 
+('Shampoo A', 15.99, 'images/shampoo_a.jpeg'),
+('Shampoo B', 12.99, 'images/shampoo_b.jpeg'),
+('Shampoo C', 14.99, 'images/shampoo_c.jpeg'),
+('Conditioner A', 18.99, 'images/conditioner_a.jpeg'),
+('Conditioner B', 16.99, 'images/conditioner_b.jpeg'),
+('Conditioner C', 17.99, 'images/conditioner_c.jpeg'),
+('Hair Oil A', 19.99, 'images/hairoil_a.jpeg'),
+('Hair Oil B', 11.99, 'images/hairoil_b.jpeg'),
+('Hair Oil C', 22.99, 'images/hairoil_c.jpeg'),
+('Serum A', 29.99, 'images/serum_a.jpeg'),
+('Serum B', 24.99, 'images/serum_b.jpeg'),
+('Serum C', 27.99, 'images/serum_c.jpeg');
